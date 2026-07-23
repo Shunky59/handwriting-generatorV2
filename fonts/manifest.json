@@ -1,0 +1,23 @@
+{
+  "source": "Converted from the single-line SVG font archive curated by Evil Mad Scientist Labs for pen-plotter use: https://github.com/golanlevin/p5-single-line-font-resources",
+  "fonts": [
+    { "id": "casual-hand", "file": "EMSCasualHand.json", "name": "Casual Hand", "category": "Handwritten", "derivative": "Covered By Your Grace", "license": "SIL Open Font License 1.1" },
+    { "id": "readability", "file": "EMSReadability.json", "name": "Readability", "category": "Handwritten", "derivative": "Just Me Again Down Here", "license": "SIL Open Font License 1.1" },
+    { "id": "nixish", "file": "EMSNixish.json", "name": "Nixish", "category": "Handwritten", "derivative": "Nixie One", "license": "SIL Open Font License 1.1" },
+    { "id": "felix", "file": "EMSFelix.json", "name": "Felix Script", "category": "Script", "derivative": "Felipa", "license": "SIL Open Font License 1.1" },
+    { "id": "elfin", "file": "EMSElfin.json", "name": "Elfin", "category": "Script", "derivative": "Dancing Script", "license": "SIL Open Font License 1.1" },
+    { "id": "invite", "file": "EMSInvite.json", "name": "Invite Script", "category": "Script", "derivative": "Tangerine", "license": "SIL Open Font License 1.1" },
+    { "id": "capitol", "file": "EMSCapitol.json", "name": "Capitol Script", "category": "Script", "derivative": "Sacramento", "license": "SIL Open Font License 1.1" },
+    { "id": "decorous", "file": "EMSDecorousScript.json", "name": "Decorous Script", "category": "Script", "derivative": "Petit Formal Script", "license": "SIL Open Font License 1.1" },
+    { "id": "little-princess", "file": "EMSLittlePrincess.json", "name": "Little Princess", "category": "Script", "derivative": "Princess Sofia", "license": "SIL Open Font License 1.1" },
+    { "id": "pepita", "file": "EMSPepita.json", "name": "Pepita", "category": "Bold & Playful", "derivative": "Pompiere", "license": "SIL Open Font License 1.1" },
+    { "id": "brush", "file": "EMSBrush.json", "name": "Brush Script", "category": "Bold & Playful", "derivative": "Alex Brush", "license": "SIL Open Font License 1.1" },
+    { "id": "delight", "file": "EMSDelight.json", "name": "Delight", "category": "Bold & Playful", "derivative": "Kalam", "license": "SIL Open Font License 1.1" },
+    { "id": "architect-tech", "file": "EMSTech.json", "name": "Architect Tech", "category": "Technical", "derivative": "Architects Daughter", "license": "SIL Open Font License 1.1" },
+    { "id": "osmotron", "file": "EMSOsmotron.json", "name": "Osmotron", "category": "Technical", "derivative": "Orbitron", "license": "SIL Open Font License 1.1" },
+    { "id": "twin-sans", "file": "TwinSans.json", "name": "Twin Sans", "category": "Technical", "derivative": "Hershey Sans", "license": "SIL Open Font License 1.1" },
+    { "id": "hershey-script", "file": "HersheyScriptMed.json", "name": "Hershey Script", "category": "Classic Engraving", "derivative": "Hershey Fonts (A. V. Hershey, 1967)", "license": "Hershey Fonts free-use license" },
+    { "id": "hershey-serif", "file": "HersheySerifMed.json", "name": "Hershey Serif", "category": "Classic Engraving", "derivative": "Hershey Fonts (A. V. Hershey, 1967)", "license": "Hershey Fonts free-use license" },
+    { "id": "hershey-sans", "file": "HersheySansMed.json", "name": "Hershey Sans", "category": "Classic Engraving", "derivative": "Hershey Fonts (A. V. Hershey, 1967)", "license": "Hershey Fonts free-use license" }
+  ]
+}
