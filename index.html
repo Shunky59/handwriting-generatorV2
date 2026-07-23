@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plotter Studio — single-line handwriting for pen plotters</title>
+<meta name="description" content="Compose text, pick a licensed single-line script, scale it to real paper, and export a plotter-ready SVG.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="rail">
+    <header class="rail__brand">
+      <svg class="rail__mark" width="30" height="30" viewBox="0 0 30 30" aria-hidden="true">
+        <circle cx="15" cy="15" r="13.5" fill="none" stroke="currentColor" stroke-width="1.4"/>
+        <path d="M15 3 V6 M15 24 V27 M3 15 H6 M24 15 H27" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        <circle cx="15" cy="15" r="2.4" fill="currentColor"/>
+      </svg>
+      <div>
+        <div class="rail__title">Plotter Studio</div>
+        <div class="rail__subtitle">single-line SVG for pen plotters</div>
+      </div>
+    </header>
+
+    <nav class="tabs" role="tablist" aria-label="Editor sections">
+      <button class="tab active" data-tab="text" role="tab" aria-selected="true">Text</button>
+      <button class="tab" data-tab="style" role="tab" aria-selected="false">Style</button>
+      <button class="tab" data-tab="page" role="tab" aria-selected="false">Page &amp; Export</button>
+    </nav>
+
+    <div class="rail__scroll">
+
+      <!-- TEXT PANEL -->
+      <section class="panel" data-panel="text">
+        <div class="panel-section">
+          <div class="panel-section__head">
+            <h2>Text blocks</h2>
+            <button class="btn btn--ghost btn--sm" id="addBlockBtn" type="button">+ Add box</button>
+          </div>
+          <div id="blockList" class="block-list"></div>
+        </div>
+      </section>
+
+      <!-- STYLE PANEL -->
+      <section class="panel" data-panel="style" hidden>
+        <div id="styleEmpty" class="empty-hint">Select a text box to style it.</div>
+
+        <div id="styleBody" hidden>
+
+          <div class="panel-section">
+            <div class="panel-section__head">
+              <h2>Typeface</h2>
+              <span class="eyebrow" id="fontCount"></span>
+            </div>
+            <div id="fontGrid" class="font-grid"></div>
+          </div>
+
+          <div class="panel-section">
+            <div class="row-actions">
+              <button class="btn btn--outline btn--sm" id="fitMarginsBtn" type="button">Fit to margins</button>
+              <button class="btn btn--outline btn--sm" id="centerPageBtn" type="button">Center on page</button>
+            </div>
+          </div>
+
+          <div class="panel-section">
+            <h2>Lettering</h2>
+            <div class="field-slider">
+              <div class="field-slider__head"><label for="sizeInput">Letter height</label><span class="readout" id="sizeReadout"></span></div>
+              <input type="range" id="sizeInput" min="2" max="60" step="0.1">
+            </div>
+            <div class="field-slider">
+              <div class="field-slider__head"><label for="letterSpacingInput">Letter spacing</label><span class="readout" id="letterSpacingReadout"></span></div>
+              <input type="range" id="letterSpacingInput" min="-3" max="12" step="0.1">
+            </div>
+            <div class="field-slider">
+              <div class="field-slider__head"><label for="wordSpacingInput">Word spacing</label><span class="readout" id="wordSpacingReadout"></span></div>
+              <input type="range" id="wordSpacingInput" min="0.5" max="30" step="0.1">
+            </div>
+            <div class="field-slider">
+              <div class="field-slider__head"><label for="lineHeightInput">Line height</label><span class="readout" id="lineHeightReadout"></span></div>
+              <input type="range" id="lineHeightInput" min="3" max="60" step="0.1">
+            </div>
+          </div>
+
+          <div class="panel-section">
+            <h2>Character &amp; line</h2>
+            <div class="toggles-row">
+              <label class="check"><input type="checkbox" id="underlineInput"> Underline</label>
+              <label class="check"><input type="checkbox" id="strikethroughInput"> Strike</label>
+              <label class="check"><input type="checkbox" id="italicsInput"> Italic</label>
+            </div>
+          </div>
+
+          <div class="panel-section">
+            <h2>Transform</h2>
+            <div class="field-slider">
+              <div class="field-slider__head"><label for="rotationInput">Rotation</label><span class="readout" id="rotationReadout"></span></div>
+              <input type="range" id="rotationInput" min="0" max="360" step="1">
+            </div>
+            <div class="field-slider">
+              <div class="field-slider__head"><label for="slantInput">Slant angle</label><span class="readout" id="slantReadout"></span></div>
+              <input type="range" id="slantInput" min="-45" max="45" step="1">
+            </div>
+          </div>
+
+          <div class="panel-section">
+            <h2>Hand-drawn feel</h2>
+            <div class="field-slider">
+              <div class="field-slider__head"><label for="jitterInput">Jitter</label><span class="readout" id="jitterReadout"></span></div>
+              <input type="range" id="jitterInput" min="0" max="10" step="0.5">
+            </div>
+            <div class="field-slider">
+              <div class="field-slider__head"><label for="wobbleInput">Baseline wobble</label><span class="readout" id="wobbleReadout"></span></div>
+              <input type="range" id="wobbleInput" min="0" max="4" step="0.1">
+            </div>
+          </div>
+
+          <div class="panel-section">
+            <h2>Pen</h2>
+            <div class="pen-row">
+              <input type="color" id="penColorInput" value="#1A2233">
+              <input type="text" id="penLabelInput" class="pen-row__label" maxlength="24" placeholder="Pen name">
+            </div>
+            <div class="field-slider">
+              <div class="field-slider__head"><label for="strokeWidthInput">Pen width</label><span class="readout" id="strokeWidthReadout"></span></div>
+              <input type="range" id="strokeWidthInput" min="0.1" max="1.5" step="0.05">
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- PAGE & EXPORT PANEL -->
+      <section class="panel" data-panel="page">
+
+        <div class="panel-section">
+          <h2>Paper</h2>
+          <label class="field-label" for="paperSelect">Size</label>
+          <select id="paperSelect" class="select"></select>
+
+          <div class="orientation-row" role="group" aria-label="Orientation">
+            <button class="btn btn--toggle" data-orientation="portrait" type="button">Portrait</button>
+            <button class="btn btn--toggle" data-orientation="landscape" type="button">Landscape</button>
+          </div>
+
+          <div class="dims-row">
+            <label class="field-label">Width<input type="number" id="pageWidthInput" step="0.1"></label>
+            <label class="field-label">Height<input type="number" id="pageHeightInput" step="0.1"></label>
+          </div>
+
+          <label class="field-label" for="marginInput">Margin<input type="number" id="marginInput" step="0.1"></label>
+        </div>
+
+        <div class="panel-section">
+          <h2>Guides</h2>
+          <div class="toggles-row toggles-row--wrap">
+            <label class="check"><input type="checkbox" id="showGridInput"> Grid</label>
+            <label class="check"><input type="checkbox" id="showMarginsInput"> Margin line</label>
+            <label class="check"><input type="checkbox" id="showRegInput"> Registration marks</label>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <h2>Export</h2>
+          <label class="check"><input type="checkbox" id="exportRegInput"> Include registration marks in export</label>
+          <button class="btn btn--primary btn--block" id="exportBtn" type="button">Download SVG</button>
+          <p class="hint">Exports at true physical size in millimeters — ready for GCode conversion.</p>
+        </div>
+
+        <div class="panel-section">
+          <h2>Project file</h2>
+          <div class="row-actions">
+            <button class="btn btn--outline btn--sm" id="saveProjectBtn" type="button">Save project</button>
+            <button class="btn btn--outline btn--sm" id="loadProjectBtn" type="button">Load project</button>
+          </div>
+          <input type="file" id="loadProjectInput" accept=".json" hidden>
+        </div>
+
+        <div class="panel-section panel-section--muted">
+          <h2>Fonts &amp; licensing</h2>
+          <p class="hint">All 18 typefaces are single-line fonts released under the SIL Open Font License or the Hershey Fonts free-use license, sourced from the Evil Mad Scientist plotter-font archive. Every letter, digit, and symbol is included — nothing is a trial or placeholder glyph.</p>
+        </div>
+
+      </section>
+
+    </div>
+  </aside>
+
+  <main class="table">
+    <div class="table__toolbar">
+      <div class="unit-toggle" role="group" aria-label="Display units">
+        <button data-unit="mm" class="active" type="button">mm</button>
+        <button data-unit="in" type="button">in</button>
+      </div>
+      <div class="table__page-label" id="pageLabel"></div>
+      <div class="zoom-controls">
+        <button id="zoomOutBtn" type="button" aria-label="Zoom out">–</button>
+        <span id="zoomLabel">100%</span>
+        <button id="zoomInBtn" type="button" aria-label="Zoom in">+</button>
+        <button id="zoomFitBtn" class="btn btn--ghost btn--sm" type="button">Fit</button>
+      </div>
+    </div>
+
+    <div class="table__viewport" id="viewport">
+      <div class="table__grid">
+        <div class="ruler-corner"></div>
+        <div class="ruler ruler--top" id="rulerTop"></div>
+        <div class="ruler ruler--left" id="rulerLeft"></div>
+        <div class="table__surface" id="surface">
+          <svg id="canvas" xmlns="http://www.w3.org/2000/svg"></svg>
+        </div>
+      </div>
+    </div>
+  </main>
+
+</div>
+
+<script src="js/paper-sizes.js"></script>
+<script src="js/fonts.js"></script>
+<script src="js/state.js"></script>
+<script src="js/render.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
